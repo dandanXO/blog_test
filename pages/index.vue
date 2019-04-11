@@ -66,3 +66,7 @@ export default {
   padding-top: 15px;
 }
 </style>
+<style lang="sass">
+.title
+  color: red
+</style>

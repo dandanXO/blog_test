@@ -43,13 +43,25 @@ module.exports = {
     // Doc:https://github.com/nuxt-community/modules/tree/master/packages/bulma
     '@nuxtjs/bulma',
     '@nuxtjs/axios',
+    ['nuxt-sass-resources-loader', './assets/main.scss']
   ],
+  /*
+** Customize the progress bar color
+*/
+  loading: { color: 'rgb(221, 209, 209)' },
 
   /*
   ** Build configuration
   */
   build: {
     postcss: {
+      plugins: {
+        'postcss-preset-env': {
+          features: {
+            customProperties: false
+          }
+        }
+      },
       preset: {
         features: {
           customProperties: false
