@@ -28,6 +28,8 @@ module.exports = {
   ** Global CSS
   */
   css: [
+    { src: '@/assets/css/main.scss', lang: 'scss' },
+    { src: 'font-awesome/scss/font-awesome.scss', lang: 'scss' }
   ],
 
   /*
@@ -43,8 +45,13 @@ module.exports = {
     // Doc:https://github.com/nuxt-community/modules/tree/master/packages/bulma
     '@nuxtjs/bulma',
     '@nuxtjs/axios',
-    ['nuxt-sass-resources-loader', './assets/main.scss']
+    '@nuxtjs/style-resources',
   ],
+  styleResources: {
+    scss: [
+      './assets/css/*.scss'
+    ]
+  },
   /*
 ** Customize the progress bar color
 */
@@ -72,7 +79,7 @@ module.exports = {
     ** You can extend webpack config here
     */
     extend(config, ctx) {
-      
+
     }
   }
 }

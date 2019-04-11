@@ -14,6 +14,7 @@
           target="_blank"
           class="button--green"
         >Documentation</a>
+        <a class="button is-white">Button</a>
         <a
           href="https://github.com/nuxt/nuxt.js"
           target="_blank"
@@ -66,7 +67,8 @@ export default {
   padding-top: 15px;
 }
 </style>
-<style lang="sass">
-.title
-  color: red
+<style lang="scss">
+.title{
+    color: $black
+  }
 </style>
