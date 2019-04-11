@@ -1,7 +1,14 @@
 const express = require('express')
 const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
+const https = require('https')
+const fs = require('fs')
 const app = express()
+
+const keyPath = './server/config/private.key';
+const certPath = './server/config/certificate.pem';
+const hskey = fs.readFileSync(keyPath);
+const hscert = fs.readFileSync(certPath);
 
 // Import and Set Nuxt.js options
 let config = require('../nuxt.config.js')
@@ -12,8 +19,8 @@ async function start() {
   const nuxt = new Nuxt(config)
 
   const {
-    host = process.env.HOST || '127.0.0.1',
-    port = process.env.PORT || 3000
+    host = process.env.HOST || '0.0.0.0',
+    port = process.env.PORT || 443
   } = nuxt.options.server
 
   // Build only in dev mode
@@ -28,7 +35,12 @@ async function start() {
   app.use(nuxt.render)
 
   // Listen the server
-  app.listen(port, host)
+  const server = https.createServer({
+    key: hskey,
+    cert:hscert
+  },app)
+  server.listen(port, host)
+  console.log(host+port)
   consola.ready({
     message: `Server listening on http://${host}:${port}`,
     badge: true
