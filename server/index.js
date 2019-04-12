@@ -40,9 +40,8 @@ async function start() {
     cert:hscert
   },app)
   server.listen(port, host)
-  console.log(host+port)
   consola.ready({
-    message: `Server listening on http://${host}:${port}`,
+    message: `Server listening on https://${host}:${port}`,
     badge: true
   })
 }
