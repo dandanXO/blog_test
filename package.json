@@ -20,6 +20,8 @@
     "express": "^4.16.4",
     "font-awesome": "^4.7.0",
     "fs": "0.0.1-security",
+    "helmet": "^3.16.0",
+    "mongoose": "^5.5.1",
     "nuxt": "^2.4.0",
     "nuxt-start": "^2.6.1",
     "swiper": "^4.5.0"

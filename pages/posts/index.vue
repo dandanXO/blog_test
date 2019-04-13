@@ -1,53 +1,45 @@
 <template>
   <section class="container">
-    <div>
-     router posts
+    <div class="columns ">
+      <div class="column" v-for="(item, key, index) in posts" :key="index">
+        <div class="card">
+          <div class="card-content">
+            <p class="title">{{item.title}}</p>
+            <div class="content ellipsis">{{item.content.slice(1,100)}}...</div>
+          </div>
+          <footer class="card-footer">
+            <p class="card-footer-item">
+              <span>
+                <nuxt-link class="is-prime" :to="{path: `posts/${item.title}`}">More</nuxt-link>
+              </span>
+            </p>
+          </footer>
+        </div>
+      </div>
     </div>
   </section>
 </template>
 
 <script>
-
+import axios from "axios";
+import https from "https";
 export default {
-  components: {
+  async asyncData() {
+    const agent = new https.Agent({
+      rejectUnauthorized: false
+    });
+    let { data } = await axios.get(`${process.env.API_URL}post/allPosts`, {
+      httpsAgent: agent
+    });
+    return { posts: data.data };
   }
-}
+};
 </script>
 
 <style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
 </style>
-<style lang="scss">
-.title{
-    color: $black
-  }
+<style lang="scss" scoped>
+.title {
+  color: $black;
+}
 </style>

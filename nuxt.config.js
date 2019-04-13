@@ -27,7 +27,9 @@ module.exports = {
   ** Customize the progress-bar color
   */
   loading: { color: '#fff' },
-
+  env: {
+    API_URL:  'https://dandan.tw:443/api/'
+  },
   /*
   ** Global CSS
   */

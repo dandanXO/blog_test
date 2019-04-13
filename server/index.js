@@ -4,20 +4,30 @@ const { Nuxt, Builder } = require('nuxt')
 const https = require('https')
 const fs = require('fs')
 const app = express()
+const helmet = require('helmet')
+
+const mongoose =require('mongoose');
 
 const keyPath = './server/config/private.key';
 const certPath = './server/config/certificate.pem';
 const hskey = fs.readFileSync(keyPath);
 const hscert = fs.readFileSync(certPath);
 
+app.use(helmet({
+  frameguard: false
+}));
 //routes
 const post = require('./api/post')
 //Routes which should handle requests
 app.use('/api/post',post)
 
+//DB
+mongoose.connect('mongodb://localhost:27017/blog', { useNewUrlParser: true });
+
 // Import and Set Nuxt.js options
 let config = require('../nuxt.config.js')
 config.dev = !(process.env.NODE_ENV === 'production')
+
 
 async function start() {
   // Init Nuxt.js
