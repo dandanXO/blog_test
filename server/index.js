@@ -10,6 +10,11 @@ const certPath = './server/config/certificate.pem';
 const hskey = fs.readFileSync(keyPath);
 const hscert = fs.readFileSync(certPath);
 
+//routes
+const post = require('./api/post')
+//Routes which should handle requests
+app.use('/api/post',post)
+
 // Import and Set Nuxt.js options
 let config = require('../nuxt.config.js')
 config.dev = !(process.env.NODE_ENV === 'production')

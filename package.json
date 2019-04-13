@@ -21,7 +21,8 @@
     "font-awesome": "^4.7.0",
     "fs": "0.0.1-security",
     "nuxt": "^2.4.0",
-    "nuxt-start": "^2.6.1"
+    "nuxt-start": "^2.6.1",
+    "swiper": "^4.5.0"
   },
   "devDependencies": {
     "@nuxtjs/style-resources": "^0.1.2",
