@@ -11,19 +11,65 @@
               <p>Testing for chat room</p>
               <button class="delete" @click="toggle=!toggle" aria-label="delete"></button>
             </div>
-            <div class="message-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+            <div class="message-body" v-html="roomMessage"></div>
           </article>
+          <div class="field">
+            <div class="columns is-mobile">
+              <input
+                class="input is-info column is-one-fifth"
+                type="text"
+                placeholder="name"
+                v-model="name"
+              >
+              <input
+                class="input is-info column"
+                type="text"
+                placeholder="message"
+                v-model="message"
+              >
+            </div>
+            <button class="button is-primary" @click="sendtext()" type="button">送出</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import io from "socket.io-client";
 export default {
   data() {
     return {
-      toggle: false
+      toggle: false,
+      name: "",
+      message: "",
+      roomMessage: "",
+      socket: io.connect("https://dandan.tw:3001", { secure: true })
     };
+  },
+  mounted() {
+    this.socket.on("message", data => {
+      this.roomMessage = `${this.roomMessage}<div class="">${data.name}:  ${
+        data.msg
+      }<br/></div>`;
+    });
+  },
+  updated(){
+    this.$nextTick(() => {
+      
+    })
+     
+      
+
+  },
+  methods: {
+    sendtext() {
+      this.socket.emit("message", {
+        name: this.name,
+        msg: this.message
+      });
+      this.message = "";
+    }
   }
 };
 </script>
@@ -33,6 +79,16 @@ export default {
   position: fixed;
   bottom: 15px;
   right: 15px;
+}
+.message-body {
+  max-height: 300px;
+  overflow-y: auto;
+}
+.columns {
+  margin: 0em;
+}
+.dropdown-menu {
+  width: 100%;
 }
 .chat-dialog {
   z-index: 3;

@@ -54,6 +54,7 @@ module.exports = {
     '@nuxtjs/bulma',
     '@nuxtjs/axios',
     '@nuxtjs/style-resources',
+    'vue-scrollto/nuxt',
   ],
   styleResources: {
     scss: [
