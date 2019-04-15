@@ -1,9 +1,13 @@
 <template>
   <div>
-    <nav class="navbar is-info" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-info " role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <a class="navbar-item" href="/">
-          <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+          <span class="icon is-medium">
+            <i class="fa fa-lg fa-film"></i>
+          </span>
+          MOVIE
+          <!-- <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28"> -->
         </a>
         <a
           role="button"
@@ -11,7 +15,7 @@
           aria-label="menu"
           aria-expanded="false"
           data-target="navbarBasicExample"
-          @click="showNav = !showNav" 
+          @click="showNav = !showNav"
           :class="{'is-active':showNav}"
         >
           <span aria-hidden="true"></span>
@@ -22,24 +26,52 @@
       <div id="navbarBasicExample" class="navbar-menu" :class="{'is-active':showNav}">
         <div class="navbar-start">
           <nuxt-link class="navbar-item" to="/">首頁</nuxt-link>
-         <nuxt-link class="navbar-item" to="/posts">文章列表</nuxt-link>
+          <nuxt-link class="navbar-item" to="/posts">文章列表</nuxt-link>
         </div>
       </div>
     </nav>
     <nuxt/>
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <p>
+          <strong>Bulma</strong> by
+          <a href="https://jgthms.com">Jeremy Thomas</a>. The source code is licensed
+          <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
+          is licensed
+          <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+        </p>
+      </div>
+    </footer>
+    
+    <Chatroom></Chatroom>
   </div>
 </template>
 <script>
+import Chatroom from "~/components/Chatroom";
 export default {
- data:function (){
-   return {
-     showNav : false
-   }
- }
-}
+  components: {
+    Chatroom
+  },
+  data: function() {
+    return {
+      showNav: false
+    };
+  }
+};
 </script>
+<style lang="scss" scoped>
+$footer-background-color: #B0C6CE;
+$footer-padding: 2rem  3rem ;
+
+.footer{background-color: $footer-background-color;
+  padding: $footer-padding;
+  position: relative;
+  bottom: 0px;
+  }
+</style>
 
 <style>
+
 html {
   font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, "Helvetica Neue", Arial, sans-serif;

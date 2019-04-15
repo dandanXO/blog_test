@@ -5,7 +5,7 @@ const https = require('https')
 const fs = require('fs')
 const app = express()
 const helmet = require('helmet')
-
+const compression = require('compression');
 const mongoose =require('mongoose');
 
 const keyPath = './server/config/private.key';
@@ -16,6 +16,7 @@ const hscert = fs.readFileSync(certPath);
 app.use(helmet({
   frameguard: false
 }));
+app.use(compression());
 //routes
 const post = require('./api/post')
 //Routes which should handle requests

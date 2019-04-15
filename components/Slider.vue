@@ -37,11 +37,6 @@ import Swipercss from "swiper/dist/css/swiper.min.css";
 
 export default {
   props: ["posts"],
-  head() {
-    return {
-      link: [{ rel: "stylesheet", href: Swipercss }]
-    };
-  },
   mounted: function() {
     var mySwiper = new Swiper(".swiper-container", {
       // Optional parameters
