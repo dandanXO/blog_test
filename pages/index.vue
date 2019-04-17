@@ -8,7 +8,7 @@
         </div>
       </div>
     </section>
-    <Slider :posts="posts"></Slider>
+    <Slider :posts="posts" :direction="'horizontal'" :loop="true"  :needPagination="true" :needNavigation="true" :needScrollbar="true"></Slider>
     <br>
     <div class="columns is-desktop">
       <div class="column" v-for="(item, key, index) in posts" :key="index">
@@ -32,19 +32,13 @@
 
 <script>
 import Slider from "~/components/Slider";
-import axios from "axios";
-import https from "https";
+
 export default {
   components: {
     Slider
   },
-  async asyncData() {
-    const agent = new https.Agent({
-      rejectUnauthorized: false
-    });
-    let { data } = await axios.get(`${process.env.API_URL}post/allPosts`, {
-      httpsAgent: agent
-    });
+  async asyncData(context) {
+    let { data } = await context.app.$axios.get(`${process.env.API_URL}post/allPosts`);
     return { posts: data.data };
   }
 };

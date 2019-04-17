@@ -21,16 +21,10 @@
 </template>
 
 <script>
-import axios from "axios";
-import https from "https";
+
 export default {
-  async asyncData() {
-    const agent = new https.Agent({
-      rejectUnauthorized: false
-    });
-    let { data } = await axios.get(`${process.env.API_URL}post/allPosts`, {
-      httpsAgent: agent
-    });
+  async asyncData(context) {
+    let { data } = await context.app.$axios.get(`${process.env.API_URL}post/allPosts`);
     return { posts: data.data };
   }
 };

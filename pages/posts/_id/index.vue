@@ -47,24 +47,18 @@
   </div>
 </template>
 <script>
-import https from "https";
-import axios from "axios";
+
 export default {
   async asyncData(context) {
-    const agent = new https.Agent({
-      rejectUnauthorized: false
-    });
-    let { data } = await axios.get(`${process.env.API_URL}post/getpost`, {
+    let { data } = await context.app.$axios.get(`${process.env.API_URL}post/getpost`, {
       params: {
         name: context.params.id
-      },
-      httpsAgent: agent
+      }
     });
-    let otherpost = await axios.get(`${process.env.API_URL}post/getotherpost`, {
+    let otherpost = await  context.app.$axios.get(`${process.env.API_URL}post/getotherpost`, {
       params: {
         expcept: context.params.id
-      },
-      httpsAgent: agent
+      }
     });
     return { movie: data.data, otherpost: otherpost.data.otherpost };
   }

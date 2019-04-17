@@ -27,6 +27,7 @@
       <!-- If we need navigation buttons -->
       <div class="swiper-button-prev"></div>
       <div class="swiper-button-next"></div>
+      <div class="swiper-scrollbar"></div>
     </div>
   </div>
 </template>
@@ -36,26 +37,31 @@ import Swiper from "swiper/dist/js/swiper.min.js";
 import Swipercss from "swiper/dist/css/swiper.min.css";
 
 export default {
-  props: ["posts"],
+  props: ["posts","direction","loop","needPagination","needNavigation","needScrollbar"],
   mounted: function() {
     var mySwiper = new Swiper(".swiper-container", {
       // Optional parameters
-      direction: "horizontal",
-      loop: true,
+      direction: this.direction,
+      loop: this.loop,
       // If we need pagination
       pagination: {
-        el: ".swiper-pagination"
+        el: this.needPagination?".swiper-pagination":""
       },
       // Navigation arrows
       navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev"
+        nextEl: this.needNavigation?".swiper-button-next":"",
+        prevEl:  this.needNavigation?".swiper-button-prev":""
       },
       // And if we need scrollbar
       scrollbar: {
-        el: ".swiper-scrollbar"
+        el: this.needScrollbar?".swiper-scrollbar":""
       }
     });
+  },
+   data() {
+    return {
+      toggle: true
+    };
   }
 };
 </script>
