@@ -28,7 +28,7 @@ module.exports = {
   */
   loading: { color: '#fff' },
   env: {
-    API_URL:  'https://dandan.tw:443/api/'
+    API_URL: 'https://dandan.tw:443/api/'
   },
   /*
   ** Global CSS
@@ -36,14 +36,25 @@ module.exports = {
   css: [
     { src: '@/assets/css/main.scss', lang: 'scss' },
     { src: 'font-awesome/scss/font-awesome.scss', lang: 'scss' },
-    
+
   ],
+  /*
+  ** render setting
+  */
+  render: {
+    gzip: {
+      threshold: 0
+    },
+    etag: {
+      weak: false
+    }
+  },
 
   /*
   ** Plugins to load before mounting the App
   */
   plugins: ['~/plugins/axios'
-   
+
   ],
 
   /*

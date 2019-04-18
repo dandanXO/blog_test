@@ -1,9 +1,10 @@
 const express = require('express')
+const routeCache = require('route-cache')
 const router = express.Router()
 
 const posts = require('../models/posts');
 
-router.get('/allPosts', (req, res, next) => {
+router.get('/allPosts',routeCache.cacheSeconds(20), (req, res, next) => {
     posts.find({})
         .then(data => {
             res.status(200).json({ data: data })
@@ -23,4 +24,11 @@ router.get('/getotherpost',(req,res,next)=>{
         res.status(200).json({ otherpost: data })
     })
 })
+// router.get('/test',routeCache.cacheSeconds(10),(req,res,next)=>{
+//     console.log('you will only see this every 10 seconds.');
+    
+//         //console.log(data)
+//         res.status(200).json({ otherpost: "data" })
+    
+// })
 module.exports = router
